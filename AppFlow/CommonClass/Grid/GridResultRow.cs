@@ -4,16 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using AppFlow.Mappers;
 using AppFlow.CommonClass.Grid;
+using AppFlow.Api.MVC.Models;
 
 namespace AppFlow.CommonClass.Grid
 {
     public class GridResultRow<TCell>
     {
         public IEnumerable<TCell> Row { get; }
-        public HomeActionUrl Url { get; }
+        public IEnumerable<Link> Url { get; }
         public GridResultRow(
                 IEnumerable<TCell> _row,
-                HomeActionUrl _url
+                IEnumerable<Link> _url
             )
         {
             Row = _row;

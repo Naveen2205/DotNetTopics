@@ -7,9 +7,9 @@ namespace AppFlow.CommonConfiguration.FieldMetaProvider
 {
     public interface IFieldDefinition
     {
-        public FieldDefinition IsSearchable(bool isSearchable);
-        public FieldDefinition IsSortable(bool isSortable);
-        public FieldDefinition IsEditable(bool isEditable);
-        public FieldDefinition WithDataSource(string dataSource);
+        public FieldDefinition IsSearchable();
+        public FieldDefinition IsSortable();
+        public FieldDefinition IsEditable();
+        public FieldDefinition WithDataSource(string withDataSource);
     }
 }

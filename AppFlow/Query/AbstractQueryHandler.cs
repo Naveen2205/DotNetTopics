@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AppFlow.CommonInterface;
+using AppFlow.Api.CommonInterface.IHandlers;
 
 namespace AppFlow.Query
 {

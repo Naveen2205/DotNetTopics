@@ -19,4 +19,9 @@
     <Folder Include="MetaProvider" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AppFlow.Api.CommonInterface\AppFlow.Api.CommonInterface.csproj" />
+    <ProjectReference Include="..\AppFlow.Api.MVC\AppFlow.Api.MVC.csproj" />
+  </ItemGroup>
+
 </Project>

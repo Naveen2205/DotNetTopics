@@ -2,22 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AppFlow.CommonInterface;
+using AppFlow.Api.CommonInterface.IHandlers;
 using AppFlow.CommonClass.Grid;
+using AppFlow.Api.MVC.Models;
+using AppFlow.Api.MVC.Routing;
 using AppFlow.Models;
 using AppFlow.CommonConfiguration.FieldMetaProvider;
 using AppFlow.Columns;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AppFlow.Mappers
 {
     public class HomeRowMapperBase : IMappingHandler<HomeRowMapping, GridResultRow<GridResultCell>>
     {
+        public HomeRowMapperBase(
+            )
+        {
+        }
         public GridResultRow<GridResultCell> Map(HomeRowMapping source)
         {
             IEnumerable<GridResultCell> sourceData = source.meta.Select(
                     x => HandleColumn(x, source.source)
                  );
-            return new GridResultRow<GridResultCell>(sourceData, source.link);
+            return new GridResultRow<GridResultCell>(sourceData, BuildLinks(source.urlHelper));
         }
 
         public GridResultCell HandleColumn(KeyValuePair<string, FieldDefinition> meta, HomeModel source)
@@ -40,22 +47,30 @@ namespace AppFlow.Mappers
                     return new GridResultCell("Error", "Error in mapping", null);
             }
         }
+
+        public IEnumerable<Link> BuildLinks(IUrlHelper urlHelper)
+        {
+            yield return new Link("Edit", urlHelper.Link(ApiRoutes.HomeRoutes.EDIT, null));
+            yield return new Link("Delete", urlHelper.Link(ApiRoutes.HomeRoutes.DELETE, null));
+            yield return new Link("Close", urlHelper.Link(ApiRoutes.HomeRoutes.CLOSE, null));
+            yield return new Link("Previous", urlHelper.Link(ApiRoutes.HomeRoutes.PREVIOUS, null));
+        }
     }
 
     public class HomeRowMapping
     {
         public HomeModel source { get; }
         public IDictionary<string, FieldDefinition> meta { get; }
-        public HomeActionUrl link { get; }
+        public IUrlHelper urlHelper { get; }
         public HomeRowMapping(
                 HomeModel _source,
                 IDictionary<string, FieldDefinition> _meta,
-                HomeActionUrl _link
+                IUrlHelper _urlHelper
             )
         {
             source = _source;
             meta = _meta;
-            link = _link;
+            urlHelper = _urlHelper;
         }
     }
 }

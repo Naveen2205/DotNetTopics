@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AppFlow.Models;
-using AppFlow.CommonInterface;
+using AppFlow.Api.CommonInterface.IHandlers;
 using AppFlow.CommonClass.Grid;
 using AppFlow.CommonConfiguration.FieldMetaProvider;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AppFlow.Mappers
 {
@@ -21,27 +22,9 @@ namespace AppFlow.Mappers
         public GridDataResult<IEnumerable<GridResultRow<GridResultCell>>> Map(HomeViewMapping source)
         {
             IEnumerable<GridResultRow<GridResultCell>> gridRow = source.source.Select(
-                    x=> _rowMapper.Map(new HomeRowMapping(x, source.meta, source.link))
+                    x=> _rowMapper.Map(new HomeRowMapping(x, source.meta, source.urlHelper))
                 );
             return new GridDataResult<IEnumerable<GridResultRow<GridResultCell>>>(gridRow);
-        }
-        
-
-        public HomeActionUrl links()
-        {
-            return new HomeActionUrl();
-        }
-    }
-
-    public class HomeActionUrl
-    {
-        public string Update { get; }
-        public string Delete { get; }
-
-        public HomeActionUrl()
-        {
-            Update = "UpdateUrl";
-            Delete = "DeleteUrl";
         }
     }
 
@@ -50,16 +33,16 @@ namespace AppFlow.Mappers
     {
         public IEnumerable<HomeModel> source { get; }
         public Dictionary<string, FieldDefinition> meta { get; }
-        public HomeActionUrl link { get; }
+        public IUrlHelper urlHelper { get; }
         public HomeViewMapping(
                 IEnumerable<HomeModel> _source,
                 Dictionary<string, FieldDefinition> _meta,
-                HomeActionUrl _link
+                IUrlHelper _urlHelper
             )
         {
             source = _source;
             meta = _meta;
-            link = _link;
+            urlHelper = _urlHelper;
         }
     }
 }

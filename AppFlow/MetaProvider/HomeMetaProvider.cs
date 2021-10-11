@@ -16,27 +16,27 @@ namespace AppFlow.MetaProvider
             {
                 {
                     HomeColumn.FirstName,
-                    new FieldDefinition().IsSearchable(true).IsSortable(true).IsEditable(true)
+                    new FieldDefinition().IsSearchable().IsSortable().IsEditable()
                 },
                 {
                     HomeColumn.LastName,
-                    new FieldDefinition().IsSearchable(true).IsSortable(true).IsEditable(true)
+                    new FieldDefinition().IsSearchable().IsSortable().IsEditable()
                 },
                 {
                     HomeColumn.DOB,
-                    new FieldDefinition().IsSearchable(true).IsSortable(true).IsEditable(true)
+                    new FieldDefinition().IsSearchable().IsSortable().IsEditable()
                 },
                 {
                     HomeColumn.Gender,
-                    new FieldDefinition().IsSearchable(true).IsSortable(true).IsEditable(true)
+                    new FieldDefinition().IsSearchable().IsSortable().IsEditable()
                 },
                 {
                     HomeColumn.City,
-                    new FieldDefinition().IsSearchable(true).IsSortable(true).IsEditable(true)
+                    new FieldDefinition().IsSearchable().IsSortable().IsEditable()
                 },
                 {
                     HomeColumn.Country,
-                    new FieldDefinition().IsSearchable(true).IsSortable(true).IsEditable(true)
+                    new FieldDefinition().IsSearchable().IsSortable().IsEditable()
                 }
             };
         }

@@ -12,24 +12,32 @@ namespace AppFlow.CommonConfiguration.FieldMetaProvider
         public bool Sortable { get; private set; }
         public bool Editable { get; private set; }
 
+        public FieldDefinition()
+        {
+            DataSource = null;
+            Searchable = false;
+            Sortable = false;
+            Editable = false;
+        }
+
         public FieldDefinition WithDataSource(string dataSource)
         {
             DataSource = dataSource;
             return this;
         }
-        public FieldDefinition IsSearchable(bool isSearchable)
+        public FieldDefinition IsSearchable()
         {
-            Searchable = isSearchable;
+            Searchable = true;
             return this;
         }
-        public FieldDefinition IsSortable(bool isSortable)
+        public FieldDefinition IsSortable()
         {
-            Sortable = isSortable;
+            Sortable = true;
             return this;
         }
-        public FieldDefinition IsEditable(bool isEditable)
+        public FieldDefinition IsEditable()
         {
-            Editable = isEditable;
+            Editable = true;
             return this;
         }
     }
